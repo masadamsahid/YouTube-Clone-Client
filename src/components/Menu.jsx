@@ -14,7 +14,7 @@ import {
   SettingsOutlined,
   ReportOutlined,
   HelpOutline,
-  SportsEsportsOutlined, SettingsBrightnessOutlined,
+  SportsEsportsOutlined, SettingsBrightnessOutlined, AccountCircleOutlined,
 } from '@mui/icons-material'
 
 import LogoImg from '../img/logo.png';
@@ -24,6 +24,7 @@ const Container = styled.div`
   background-color: #202020;
   height: 100vh;
   color: white;
+  font-size: 12px;
 `;
 
 const Wrapper = styled.div`
@@ -57,6 +58,24 @@ const Hr = styled.hr`
   border: .5px solid #373737;
 `
 
+const Login = styled.div`
+  
+`
+
+const Button = styled.button`
+  padding: 5px 15px;
+  background-color: transparent;
+  border: 1px solid #3ea6ff;
+  color: #3ea6ff;
+  border-radius: 3px;
+  font-weight: 500;
+  margin-top: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`
+
 const Menu = () => {
   return (
     <Container>
@@ -86,6 +105,14 @@ const Menu = () => {
           <HistoryOutlined/>
           History
         </Item>
+        <Hr/>
+        <Login>
+          Sign in to like videos, comment, and subscribe.
+        </Login>
+        <Button>
+          <AccountCircleOutlined/>
+          SIGN IN
+        </Button>
         <Hr/>
         <Item>
           <LibraryMusicOutlined/>
