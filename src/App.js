@@ -10,7 +10,8 @@ const Container = styled.div`
 const Main = styled.div`
   flex: 7;
 `;
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+`;
 
 function App() {
   return (
@@ -19,7 +20,58 @@ function App() {
       <Main>
         <Navbar/>
         <Wrapper>
-          video cards
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
+          <h1>Test</h1>
         </Wrapper>
       </Main>
     </Container>

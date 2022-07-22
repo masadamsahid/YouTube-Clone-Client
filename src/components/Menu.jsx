@@ -14,17 +14,32 @@ import {
   SettingsOutlined,
   ReportOutlined,
   HelpOutline,
-  SportsEsportsOutlined, SettingsBrightnessOutlined, AccountCircleOutlined,
+  SportsEsportsOutlined,
+  SettingsBrightnessOutlined,
+  AccountCircleOutlined,
 } from '@mui/icons-material'
 
 import LogoImg from '../img/logo.png';
 
 const Container = styled.div`
-  flex: 1;
+  flex: 1.5;
   background-color: #202020;
   height: 100vh;
   color: white;
   font-size: 12px;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  &::-webkit-scrollbar{
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track{
+    background-color: transparent;
+  }
+  &:hover::-webkit-scrollbar-thumb{
+    background-color: rgba(255,255,255,.2);
+    border-radius: 4px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -74,6 +89,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
+  width: 100%;
 `
 
 const Menu = () => {
@@ -85,24 +101,24 @@ const Menu = () => {
           MasadamTube
         </Logo>
         <Item>
-          <Home/>
+          <Home fontSize='small'/>
           Home
         </Item>
         <Item>
-          <ExploreOutlined/>
+          <ExploreOutlined fontSize='small'/>
           Explore
         </Item>
         <Item>
-          <SubscriptionsOutlined/>
+          <SubscriptionsOutlined fontSize='small'/>
           Subscriptions
         </Item>
         <Hr/>
         <Item>
-          <VideoLibraryOutlined/>
+          <VideoLibraryOutlined fontSize='small'/>
           Library
         </Item>
         <Item>
-          <HistoryOutlined/>
+          <HistoryOutlined fontSize='small'/>
           History
         </Item>
         <Hr/>
@@ -110,49 +126,49 @@ const Menu = () => {
           Sign in to like videos, comment, and subscribe.
         </Login>
         <Button>
-          <AccountCircleOutlined/>
+          <AccountCircleOutlined fontSize='small'/>
           SIGN IN
         </Button>
         <Hr/>
         <Item>
-          <LibraryMusicOutlined/>
+          <LibraryMusicOutlined fontSize='small'/>
           Music
         </Item>
         <Item>
-          <SportsBasketballOutlined/>
+          <SportsBasketballOutlined fontSize='small'/>
           Sports
         </Item>
         <Item>
-          <SportsEsportsOutlined/>
+          <SportsEsportsOutlined fontSize='small'/>
           Gaming
         </Item>
         <Item>
-          <MovieOutlined/>
+          <MovieOutlined fontSize='small'/>
           Movies
         </Item>
         <Item>
-          <NewspaperOutlined/>
+          <NewspaperOutlined fontSize='small'/>
           News
         </Item>
         <Item>
-          <LiveTvOutlined/>
+          <LiveTvOutlined fontSize='small'/>
           Live
         </Item>
         <Hr/>
         <Item>
-          <SettingsOutlined/>
+          <SettingsOutlined fontSize='small'/>
           Settings
         </Item>
         <Item>
-          <ReportOutlined/>
+          <ReportOutlined fontSize='small'/>
           Report
         </Item>
         <Item>
-          <HelpOutline/>
+          <HelpOutline fontSize='small'/>
           Help
         </Item>
         <Item>
-          <SettingsBrightnessOutlined/>
+          <SettingsBrightnessOutlined fontSize='small'/>
           Light Mode
         </Item>
       </Wrapper>
