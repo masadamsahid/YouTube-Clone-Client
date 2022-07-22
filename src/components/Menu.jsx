@@ -23,9 +23,9 @@ import LogoImg from '../img/logo.png';
 
 const Container = styled.div`
   flex: 1.5;
-  background-color: #202020;
+  background-color: ${({theme}) => theme.bg};
   height: 100vh;
-  color: white;
+  color: ${({theme}) => theme.text};
   font-size: 12px;
   position: sticky;
   top: 0;
@@ -37,7 +37,7 @@ const Container = styled.div`
     background-color: transparent;
   }
   &:hover::-webkit-scrollbar-thumb{
-    background-color: rgba(255,255,255,.2);
+    background-color: ${({theme}) => theme.scrollbarColor};
     border-radius: 4px;
   }
 `;
@@ -70,7 +70,7 @@ const Img = styled.img`
 
 const Hr = styled.hr`
   margin: 15px 0;
-  border: .5px solid #373737;
+  border: .5px solid ${({theme}) => theme.soft};
 `
 
 const Login = styled.div`
@@ -92,7 +92,7 @@ const Button = styled.button`
   width: 100%;
 `
 
-const Menu = () => {
+const Menu = ({darkMode, setDarkMode}) => {
   return (
     <Container>
       <Wrapper>
@@ -167,9 +167,9 @@ const Menu = () => {
           <HelpOutline fontSize='small'/>
           Help
         </Item>
-        <Item>
+        <Item onClick={()=>setDarkMode(!darkMode)}>
           <SettingsBrightnessOutlined fontSize='small'/>
-          Light Mode
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
         </Item>
       </Wrapper>
     </Container>
