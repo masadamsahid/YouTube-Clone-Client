@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {PlaylistAdd, Share, ThumbDownOutlined, ThumbUpOutlined} from "@mui/icons-material";
+import Comments from "../components/Comments";
 
 const Container = styled.div`
   display: flex;
@@ -158,6 +159,8 @@ const WatchVideoPage = () => {
           </ChannelInfo>
           <Subscribe>SUBSCRIBE</Subscribe>
         </Channel>
+        <Hr/>
+        <Comments/>
       </Content>
       <Recommendation>recommendation</Recommendation>
     </Container>
