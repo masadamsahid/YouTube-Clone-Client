@@ -18,6 +18,18 @@ const Main = styled.div`
   background-color: ${({theme}) => theme.bg};
   transition: all .2s ease-in-out;
   color: ${({theme}) => theme.text};
+  height: 100vh;
+  overflow-y: auto;
+  &::-webkit-scrollbar{
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track{
+    background-color: transparent;
+  }
+  &:hover::-webkit-scrollbar-thumb{
+    background-color: ${({theme}) => theme.scrollbarColor};
+    border-radius: 4px;
+  }
 `;
 const Wrapper = styled.div`
   padding: 12px;
