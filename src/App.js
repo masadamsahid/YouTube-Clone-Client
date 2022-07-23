@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import {darkTheme, lightTheme} from "./utils/Theme";
 import HomePage from "./pages/HomePage";
 import WatchVideoPage from "./pages/WatchVideoPage";
+import SignInPage from "./pages/SignInPage";
 
 const Container = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ function App() {
                   <Route path="video">
                     <Route path=":id" element={<WatchVideoPage/>}/>
                   </Route>
+                  <Route path="signin" element={<SignInPage/>}/>
                 </Route>
               </Routes>
             </Wrapper>

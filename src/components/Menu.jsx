@@ -137,11 +137,13 @@ const Menu = ({darkMode, setDarkMode}) => {
         <Hr/>
         <Login>
           Sign in to like videos, comment, and subscribe.
+          <Link to='/signin' style={{textDecoration: 'none'}}>
+            <Button>
+              <AccountCircleOutlined fontSize='small'/>
+              SIGN IN
+            </Button>
+          </Link>
         </Login>
-        <Button>
-          <AccountCircleOutlined fontSize='small'/>
-          SIGN IN
-        </Button>
         <Hr/>
         <Title>BEST OF MASADAMTUBE</Title>
         <Item>
