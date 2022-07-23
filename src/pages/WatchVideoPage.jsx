@@ -58,6 +58,56 @@ const Recommendation = styled.div`
   flex: 2;
 `;
 
+const Channel = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+`;
+
+const ChannelInfo = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+const Image = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+`;
+
+const ChannelDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${({theme}) => theme.text};
+`;
+
+const ChannelName = styled.span`
+  font-weight: 500;
+`;
+
+const ChannelCounter = styled.span`
+  margin-top: 5px;
+  margin-bottom: 20px;
+  color: ${({theme}) => theme.textSoft};
+  font-size: 12px;
+`;
+
+const Description = styled.p`
+  font-size: 12px;
+`;
+
+const Subscribe = styled.button`
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 2px;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 20px;
+  font-weight: 500;
+  cursor: pointer;
+`;
+
 const WatchVideoPage = () => {
   return (
     <Container>
@@ -78,20 +128,36 @@ const WatchVideoPage = () => {
           <Info>781,901 views • 25 Jul 2022</Info>
           <Buttons>
             <Button>
-              <ThumbUpOutlined/> Like
+              <ThumbUpOutlined fontSize='small'/> Like
             </Button>
             <Button>
-              <ThumbDownOutlined/> Disike
+              <ThumbDownOutlined fontSize='small'/> Disike
             </Button>
             <Button>
-              <Share/> Share
+              <Share fontSize='small'/> Share
             </Button>
             <Button>
-              <PlaylistAdd/> Save
+              <PlaylistAdd fontSize='small'/> Save
             </Button>
           </Buttons>
         </Details>
         <Hr/>
+        <Channel>
+          <ChannelInfo>
+            <Image src='https://yt3.ggpht.com/yti/APfAmoF4kXb--RJtyQ1ePoOSZoDIm0OAt1WJy2lyfDkqKQ=s88-c-k-c0x00ffffff-no-rj-mo'/>
+            <ChannelDetail>
+              <ChannelName>Adam Gamtenk</ChannelName>
+              <ChannelCounter>122K subscribers</ChannelCounter>
+              <Description>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, dolor error expedita illo ipsa
+                laudantium magni molestiae, neque nobis praesentium quam voluptatibus!
+                A aliquam aliquid amet dicta distinctio dolorem facere incidunt nihil non,
+                officiis quaerat saepe sint, tempora tempore vero?
+              </Description>
+            </ChannelDetail>
+          </ChannelInfo>
+          <Subscribe>SUBSCRIBE</Subscribe>
+        </Channel>
       </Content>
       <Recommendation>recommendation</Recommendation>
     </Container>
