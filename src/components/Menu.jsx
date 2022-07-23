@@ -20,6 +20,7 @@ import {
 } from '@mui/icons-material'
 
 import LogoImg from '../img/logo.png';
+import {Link} from "react-router-dom";
 
 const Container = styled.div`
   flex: 1.5;
@@ -102,10 +103,12 @@ const Menu = ({darkMode, setDarkMode}) => {
   return (
     <Container>
       <Wrapper>
-        <Logo>
-          <Img src={LogoImg}/>
-          MasadamTube
-        </Logo>
+        <Link to='/' style={{textDecoration: 'none', color: 'inherit'}}>
+          <Logo>
+            <Img src={LogoImg}/>
+            MasadamTube
+          </Logo>
+        </Link>
         <Item>
           <Home fontSize='small'/>
           Home

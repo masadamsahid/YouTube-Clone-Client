@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 const Container = styled.div`
   width: 240px;
@@ -48,17 +49,19 @@ const Info = styled.div`
 
 const Card = () => {
   return (
-    <Container>
-      <Image src='https://www.adobe.com/express/create/thumbnail/media_1dbde0324d7a246981b97c7efc38d56176d359e3f.jpeg?width=400&format=jpeg&optimize=medium'/>
-      <Details>
-        <ChannelImg src='https://yt3.ggpht.com/yti/APfAmoF4kXb--RJtyQ1ePoOSZoDIm0OAt1WJy2lyfDkqKQ=s88-c-k-c0x00ffffff-no-rj-mo' />
-        <Texts>
-          <Title>Test Video</Title>
-          <ChannelName>Adam Gamtenk</ChannelName>
-          <Info>781,901 views • 1 day ago</Info>
-        </Texts>
-      </Details>
-    </Container>
+    <Link to={`/video/test`} style={{textDecoration: 'none'}}>
+      <Container>
+        <Image src='https://www.adobe.com/express/create/thumbnail/media_1dbde0324d7a246981b97c7efc38d56176d359e3f.jpeg?width=400&format=jpeg&optimize=medium'/>
+        <Details>
+          <ChannelImg src='https://yt3.ggpht.com/yti/APfAmoF4kXb--RJtyQ1ePoOSZoDIm0OAt1WJy2lyfDkqKQ=s88-c-k-c0x00ffffff-no-rj-mo' />
+          <Texts>
+            <Title>Test Video</Title>
+            <ChannelName>Adam Gamtenk</ChannelName>
+            <Info>781,901 views • 1 day ago</Info>
+          </Texts>
+        </Details>
+      </Container>
+    </Link>
   );
 };
 
