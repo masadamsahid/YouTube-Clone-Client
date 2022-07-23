@@ -49,7 +49,9 @@ function App() {
             <Wrapper>
               <Routes>
                 <Route path="/">
-                  <Route index element={<HomePage/>}/>
+                  <Route index element={<HomePage type="random"/>}/>
+                  <Route path="trends" element={<HomePage type="trend"/>}/>
+                  <Route path="subscriptions" element={<HomePage type="sub"/>}/>
                   <Route path="video">
                     <Route path=":id" element={<WatchVideoPage/>}/>
                   </Route>

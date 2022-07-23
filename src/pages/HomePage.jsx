@@ -9,20 +9,20 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-const HomePage = () => {
+const HomePage = ({type}) => {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get("videos/random/");
+      const res = await axios.get(`/videos/${type}`);
       console.log(res);
       setVideos(res.data);
     }
     fetchVideos();
-  }, []);
+  }, [type]);
   return (
     <Container>
         {videos.map(video => (
-          <Card key={video._id}/>
+          <Card key={video._id} video={video}/>
         ))}
     </Container>
   );

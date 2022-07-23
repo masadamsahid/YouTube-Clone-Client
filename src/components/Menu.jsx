@@ -113,18 +113,24 @@ const Menu = ({darkMode, setDarkMode}) => {
             MasadamTube
           </Logo>
         </Link>
-        <Item>
-          <Home fontSize='small'/>
-          Home
-        </Item>
-        <Item>
-          <ExploreOutlined fontSize='small'/>
-          Explore
-        </Item>
-        <Item>
-          <SubscriptionsOutlined fontSize='small'/>
-          Subscriptions
-        </Item>
+        <Link to='/' style={{textDecoration: 'none', color: 'inherit'}}>
+          <Item>
+            <Home fontSize='small'/>
+            Home
+          </Item>
+        </Link>
+        <Link to='trends' style={{textDecoration: 'none', color: 'inherit'}}>
+          <Item>
+            <ExploreOutlined fontSize='small'/>
+            Explore
+          </Item>
+        </Link>
+        <Link to='subscriptions' style={{textDecoration: 'none', color: 'inherit'}}>
+          <Item>
+            <SubscriptionsOutlined fontSize='small'/>
+            Subscriptions
+          </Item>
+        </Link>
         <Hr/>
         <Item>
           <VideoLibraryOutlined fontSize='small'/>
