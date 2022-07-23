@@ -63,6 +63,10 @@ const Item = styled.div`
   cursor: pointer;
   padding: 7.5px 0;
   font-size: 12px;
+  
+  &:hover{
+    background-color: ${(props) => props.theme.soft};
+  }
 `
 
 const Img = styled.img`
