@@ -1,9 +1,12 @@
 import styled, {ThemeProvider} from "styled-components";
+import {useState} from "react";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 import {darkTheme, lightTheme} from "./utils/Theme";
-import {useState} from "react";
+import HomePage from "./pages/HomePage";
+import WatchVideoPage from "./pages/WatchVideoPage";
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +18,9 @@ const Main = styled.div`
   transition: all .2s ease-in-out;
   color: ${({theme}) => theme.text};
 `;
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding: 22px;
+`;
 
 function App() {
 
@@ -24,64 +29,22 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Container>
-        <Menu darkMode={darkMode} setDarkMode={setDarkMode}/>
-        <Main>
-          <Navbar/>
-          <Wrapper>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-            <h1>Test</h1>
-          </Wrapper>
-        </Main>
+        <BrowserRouter>
+          <Menu darkMode={darkMode} setDarkMode={setDarkMode}/>
+          <Main>
+            <Navbar/>
+            <Wrapper>
+              <Routes>
+                <Route path="/">
+                  <Route index element={<HomePage/>}/>
+                  <Route path="video">
+                    <Route path=":id" element={<WatchVideoPage/>}/>
+                  </Route>
+                </Route>
+              </Routes>
+            </Wrapper>
+          </Main>
+        </BrowserRouter>
       </Container>
     </ThemeProvider>
   );
