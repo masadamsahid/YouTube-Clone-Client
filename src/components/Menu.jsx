@@ -23,7 +23,7 @@ import LogoImg from '../img/logo.png';
 
 const Container = styled.div`
   flex: 1.5;
-  background-color: ${({theme}) => theme.bg};
+  background-color: ${({theme}) => theme.bgLighter};
   height: 100vh;
   color: ${({theme}) => theme.text};
   font-size: 12px;
@@ -89,7 +89,6 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
-  width: 100%;
 `
 
 const Title = styled.h2`
