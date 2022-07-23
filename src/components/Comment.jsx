@@ -31,7 +31,9 @@ const Date = styled.span`
   margin-left: 5px;
 `;
 
-const Text = styled.span``;
+const Text = styled.span`
+  font-size: 12px;
+`;
 
 const Comment = () => {
   return (
