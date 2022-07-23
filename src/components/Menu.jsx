@@ -92,6 +92,13 @@ const Button = styled.button`
   width: 100%;
 `
 
+const Title = styled.h2`
+  font-size: 14px;
+  font-weight: 500;
+  color: #aaaaaa;
+  margin-bottom: 20px;
+`
+
 const Menu = ({darkMode, setDarkMode}) => {
   return (
     <Container>
@@ -130,6 +137,7 @@ const Menu = ({darkMode, setDarkMode}) => {
           SIGN IN
         </Button>
         <Hr/>
+        <Title>BEST OF MASADAMTUBE</Title>
         <Item>
           <LibraryMusicOutlined fontSize='small'/>
           Music
