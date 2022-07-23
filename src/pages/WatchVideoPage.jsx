@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import {PlaylistAdd, Share, ThumbDownOutlined, ThumbUpOutlined} from "@mui/icons-material";
 import Comments from "../components/Comments";
+import Card from "../components/Card";
 
 const Container = styled.div`
   display: flex;
@@ -162,7 +163,16 @@ const WatchVideoPage = () => {
         <Hr/>
         <Comments/>
       </Content>
-      <Recommendation>recommendation</Recommendation>
+      <Recommendation>
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+      </Recommendation>
     </Container>
   );
 };

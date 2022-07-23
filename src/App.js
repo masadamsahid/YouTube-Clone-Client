@@ -19,7 +19,7 @@ const Main = styled.div`
   color: ${({theme}) => theme.text};
 `;
 const Wrapper = styled.div`
-  padding: 22px;
+  padding: 12px;
 `;
 
 function App() {
