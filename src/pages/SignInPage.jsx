@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -13,9 +14,9 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme})=> theme.bgLighter};
+  background-color: ${({theme}) => theme.bgLighter};
   padding: 20px 50px;
-  border: 1px solid ${({theme})=> theme.soft};
+  border: 1px solid ${({theme}) => theme.soft};
   gap: 10px;
 `;
 
@@ -29,12 +30,17 @@ const SubTitle = styled.h2`
 `;
 
 const Input = styled.input`
-  border: 1px solid ${({theme})=> theme.soft};
+  border: 1px solid ${({theme}) => theme.soft};
   border-radius: 3px;
   padding: 10px;
   background-color: transparent;
   outline: none;
   width: 100%;
+  color: ${({theme}) => theme.text};
+
+  &:focus {
+    outline: 1px solid #3392ff;
+  }
 `;
 
 const Button = styled.button`
@@ -43,14 +49,14 @@ const Button = styled.button`
   padding: 10px 20px;
   font-weight: 500;
   cursor: pointer;
-  background-color: ${({theme})=> theme.soft};
-  color: ${({theme})=> theme.textSoft};
+  background-color: ${({theme}) => theme.soft};
+  color: ${({theme}) => theme.textSoft};
 `;
 
 const More = styled.div`
   display: flex;
   font-size: 12px;
-  color: ${({theme})=> theme.textSoft};
+  color: ${({theme}) => theme.textSoft};
   margin-top: 10px;
 `;
 
@@ -63,21 +69,35 @@ const Link = styled.span`
 `;
 
 const SignInPage = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/auth/signin", {name, password});
+      console.log(res.data);
+    }catch (err) {
+    
+    }
+  }
+  
   return (
     <Container>
       <Wrapper>
         <Title>Sign In</Title>
         <SubTitle>to continue to MasadamTube</SubTitle>
-        <Input placeholder='username'/>
-        <Input type='password' placeholder='password'/>
-        <Button>
+        <Input placeholder='username' onChange={(e) => setName(e.target.value)}/>
+        <Input type='password' placeholder='password' onChange={(e) => setPassword(e.target.value)}/>
+        <Button onClick={handleLogin}>
           Sign in
         </Button>
         <Title>or</Title>
         <SubTitle>to continue to MasadamTube</SubTitle>
-        <Input placeholder='username'/>
-        <Input type='email' placeholder='email'/>
-        <Input type='password' placeholder='password'/>
+        <Input placeholder='username' onChange={(e) => setName(e.target.value)}/>
+        <Input type='email' placeholder='email' onChange={(e) => setEmail(e.target.value)}/>
+        <Input type='password' placeholder='password' onChange={(e) => setPassword(e.target.value)}/>
         <Button>
           Sign up
         </Button>
