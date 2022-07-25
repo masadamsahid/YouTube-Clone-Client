@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {PlaylistAdd, Share, ThumbDownOutlined, ThumbUpOutlined} from "@mui/icons-material";
+import {useDispatch, useSelector} from "react-redux";
 import Comments from "../components/Comments";
 import Card from "../components/Card";
+import {useLocation, useParams} from "react-router-dom";
+import axios from "axios";
+import {fetchFailure, fetchStart, fetchSuccess} from "../redux/videoSlice";
+import {format} from "timeago.js";
 
 const Container = styled.div`
   display: flex;
@@ -111,6 +116,29 @@ const Subscribe = styled.button`
 `;
 
 const WatchVideoPage = () => {
+  const dispatch = useDispatch();
+  const {currentUser} = useSelector(store => store.user);
+  const {currentVideo} = useSelector(store => store.video);
+  
+  const {id} = useParams();
+  
+  const [channel,setChannel] = useState({});
+  
+  useEffect(()=>{
+    const fetchData = async () => {
+      fetchStart();
+      try {
+        const videoRes = await axios.get(`/videos/find/${id}`);
+        
+        const channelRes = await axios.get(`/users/find/${videoRes.data.userId}`);
+        
+        setChannel(channelRes.data);
+        dispatch(fetchSuccess(videoRes.data));
+      }catch (err) {fetchFailure();console.log(err);}
+    }
+    fetchData();
+  },[id,dispatch])
+  
   return (
     <Container>
       <Content>
@@ -125,15 +153,15 @@ const WatchVideoPage = () => {
             allowFullScreen
           ></iframe>
         </VideoWrapper>
-        <Title>Test video</Title>
+        <Title>{currentVideo?.title}</Title>
         <Details>
-          <Info>781,901 views • 25 Jul 2022</Info>
+          <Info>{currentVideo?.views} views • {format(currentVideo?.createdAt)}</Info>
           <Buttons>
             <Button>
-              <ThumbUpOutlined fontSize='small'/> Like
+              <ThumbUpOutlined fontSize='small'/> {currentVideo?.likes?.length}
             </Button>
             <Button>
-              <ThumbDownOutlined fontSize='small'/> Disike
+              <ThumbDownOutlined fontSize='small'/> {currentVideo?.dislikes?.length}
             </Button>
             <Button>
               <Share fontSize='small'/> Share
@@ -146,15 +174,12 @@ const WatchVideoPage = () => {
         <Hr/>
         <Channel>
           <ChannelInfo>
-            <Image src='https://yt3.ggpht.com/yti/APfAmoF4kXb--RJtyQ1ePoOSZoDIm0OAt1WJy2lyfDkqKQ=s88-c-k-c0x00ffffff-no-rj-mo'/>
+            <Image src={channel?.img || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}/>
             <ChannelDetail>
-              <ChannelName>Adam Gamtenk</ChannelName>
-              <ChannelCounter>122K subscribers</ChannelCounter>
+              <ChannelName>{channel?.name}</ChannelName>
+              <ChannelCounter>{channel?.subscribers?.length || '0'} subscribers</ChannelCounter>
               <Description>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, dolor error expedita illo ipsa
-                laudantium magni molestiae, neque nobis praesentium quam voluptatibus!
-                A aliquam aliquid amet dicta distinctio dolorem facere incidunt nihil non,
-                officiis quaerat saepe sint, tempora tempore vero?
+                {currentVideo?.desc || '[NO DESC]'}
               </Description>
             </ChannelDetail>
           </ChannelInfo>
@@ -164,14 +189,14 @@ const WatchVideoPage = () => {
         <Comments/>
       </Content>
       <Recommendation>
+        {/*<Card type="small"/>
         <Card type="small"/>
         <Card type="small"/>
         <Card type="small"/>
         <Card type="small"/>
         <Card type="small"/>
         <Card type="small"/>
-        <Card type="small"/>
-        <Card type="small"/>
+        <Card type="small"/>*/}
       </Recommendation>
     </Container>
   );

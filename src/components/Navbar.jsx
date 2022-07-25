@@ -78,12 +78,9 @@ const Navbar = (props) => {
   const theme = useTheme();
   
   const {currentUser} = useSelector((store) => store.user);
-  console.log("the currentUser:",currentUser?.img)
   
   const [profileMenuAnchor,setProfileMenuAnchor] = useState(null);
   const open = Boolean(profileMenuAnchor);
-  
-  console.log(profileMenuAnchor);
   
   const handleClick = (e) => {
     setProfileMenuAnchor(e.currentTarget);
@@ -104,7 +101,7 @@ const Navbar = (props) => {
           <User>
             <VideoCallOutlined/>
             <Avatar
-              src={currentUser.img ? currentUser.img : ""}
+              src={currentUser.img ? currentUser.img : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
               onClick={handleClick}
             />
             {currentUser.name}
