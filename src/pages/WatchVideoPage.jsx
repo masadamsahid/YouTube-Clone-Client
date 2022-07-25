@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import {PlaylistAdd, Share, ThumbDownOutlined, ThumbUpOutlined} from "@mui/icons-material";
+import {PlaylistAdd, Share, ThumbDown, ThumbDownOutlined, ThumbUp, ThumbUpOutlined} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import Comments from "../components/Comments";
 import Card from "../components/Card";
 import {useLocation, useParams} from "react-router-dom";
 import axios from "axios";
-import {fetchFailure, fetchStart, fetchSuccess} from "../redux/videoSlice";
+import {dislikeVideo, fetchFailure, fetchStart, fetchSuccess, likeVideo} from "../redux/videoSlice";
 import {format} from "timeago.js";
 
 const Container = styled.div`
@@ -50,7 +50,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
-  color: inherit;
+  color: ${({isPressed}) => isPressed ? 'skyblue' : 'inherit'};
   background-color: inherit;
   border: none;
   cursor: pointer;
@@ -139,6 +139,16 @@ const WatchVideoPage = () => {
     fetchData();
   },[id,dispatch])
   
+  const handleLike = async () => {
+    await axios.put(`/users/like/${currentVideo._id}`);
+    dispatch(likeVideo(currentUser._id));
+  }
+  
+  const handleDislike = async () => {
+    await axios.put(`/users/dislike/${currentVideo._id}`);
+    dispatch(dislikeVideo(currentUser._id));
+  }
+  
   return (
     <Container>
       <Content>
@@ -157,11 +167,27 @@ const WatchVideoPage = () => {
         <Details>
           <Info>{currentVideo?.views} views • {format(currentVideo?.createdAt)}</Info>
           <Buttons>
-            <Button>
-              <ThumbUpOutlined fontSize='small'/> {currentVideo?.likes?.length}
+            <Button
+              onClick={handleLike}
+              isPressed={currentVideo.likes.includes(currentUser?._id)}
+            >
+              {currentVideo.likes.includes(currentUser?._id) ? (
+                <ThumbUp fontSize='small'/>
+              ) : (
+                <ThumbUpOutlined fontSize='small'/>
+              )}
+              {currentVideo?.likes?.length}
             </Button>
-            <Button>
-              <ThumbDownOutlined fontSize='small'/> {currentVideo?.dislikes?.length}
+            <Button
+              onClick={handleDislike}
+              isPressed={currentVideo.dislikes.includes(currentUser?._id)}
+            >
+              {currentVideo.dislikes.includes(currentUser?._id) ? (
+                <ThumbDown fontSize='small'/>
+              ):(
+                <ThumbDownOutlined fontSize='small'/>
+              )}
+              {currentVideo?.dislikes?.length}
             </Button>
             <Button>
               <Share fontSize='small'/> Share
@@ -183,7 +209,9 @@ const WatchVideoPage = () => {
               </Description>
             </ChannelDetail>
           </ChannelInfo>
-          <Subscribe>SUBSCRIBE</Subscribe>
+          <Subscribe>
+            {currentUser?.subscribedUsers?.includes(channel._id) ? 'SUBSCRIBED' : 'SUBSCRIBE'}
+          </Subscribe>
         </Channel>
         <Hr/>
         <Comments/>
