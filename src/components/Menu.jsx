@@ -21,6 +21,7 @@ import {
 
 import LogoImg from '../img/logo.png';
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const Container = styled.div`
   flex: 1.5;
@@ -31,13 +32,16 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   overflow-y: auto;
-  &::-webkit-scrollbar{
+
+  &::-webkit-scrollbar {
     width: 6px;
   }
-  &::-webkit-scrollbar-track{
+
+  &::-webkit-scrollbar-track {
     background-color: transparent;
   }
-  &:hover::-webkit-scrollbar-thumb{
+
+  &:hover::-webkit-scrollbar-thumb {
     background-color: ${({theme}) => theme.scrollbarColor};
     border-radius: 4px;
   }
@@ -63,8 +67,8 @@ const Item = styled.div`
   cursor: pointer;
   padding: 7.5px 0;
   font-size: 12px;
-  
-  &:hover{
+
+  &:hover {
     background-color: ${(props) => props.theme.soft};
   }
 `
@@ -79,7 +83,7 @@ const Hr = styled.hr`
 `
 
 const Login = styled.div`
-  
+
 `
 
 const Button = styled.button`
@@ -104,6 +108,9 @@ const Title = styled.h2`
 `
 
 const Menu = ({darkMode, setDarkMode}) => {
+  
+  const {currentUser} = useSelector((store) => store.user);
+  
   return (
     <Container>
       <Wrapper>
@@ -141,16 +148,20 @@ const Menu = ({darkMode, setDarkMode}) => {
           History
         </Item>
         <Hr/>
-        <Login>
-          Sign in to like videos, comment, and subscribe.
-          <Link to='/signin' style={{textDecoration: 'none'}}>
-            <Button>
-              <AccountCircleOutlined fontSize='small'/>
-              SIGN IN
-            </Button>
-          </Link>
-        </Login>
-        <Hr/>
+        {!currentUser && (
+          <>
+            <Login>
+              Sign in to like videos, comment, and subscribe.
+              <Link to='/signin' style={{textDecoration: 'none'}}>
+                <Button>
+                  <AccountCircleOutlined fontSize='small'/>
+                  SIGN IN
+                </Button>
+              </Link>
+            </Login>
+            <Hr/>
+          </>
+        )}
         <Title>BEST OF MASADAMTUBE</Title>
         <Item>
           <LibraryMusicOutlined fontSize='small'/>
@@ -189,7 +200,7 @@ const Menu = ({darkMode, setDarkMode}) => {
           <HelpOutline fontSize='small'/>
           Help
         </Item>
-        <Item onClick={()=>setDarkMode(!darkMode)}>
+        <Item onClick={() => setDarkMode(!darkMode)}>
           <SettingsBrightnessOutlined fontSize='small'/>
           {darkMode ? 'Light Mode' : 'Dark Mode'}
         </Item>

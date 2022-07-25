@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import {AccountCircleOutlined, SearchOutlined} from "@mui/icons-material";
+import {AccountCircleOutlined, SearchOutlined, VideoCallOutlined} from "@mui/icons-material";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {darkTheme} from "../utils/Theme";
 
 
 const Container = styled.div`
@@ -32,6 +34,7 @@ const Input = styled.input`
   flex: auto;
   border: none;
   background-color: transparent;
+  color: ${({theme}) => theme.text};
 `
 
 const Button = styled.button`
@@ -47,7 +50,25 @@ const Button = styled.button`
   gap: 5px;
 `
 
+const User = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+`;
+
+const Avatar = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #999;
+`;
+
 const Navbar = () => {
+  
+  const {currentUser} = useSelector((store) => store.user);
+  console.log(currentUser)
+  
   return (
     <Container>
       <Wrapper>
@@ -55,12 +76,20 @@ const Navbar = () => {
           <Input placeholder='Search'/>
           <SearchOutlined/>
         </Search>
-        <Link to='/signin' style={{textDecoration: 'none'}}>
-          <Button>
-            <AccountCircleOutlined fontSize='small'/>
-            SIGN IN
-          </Button>
-        </Link>
+        {currentUser ? (
+          <User>
+            <VideoCallOutlined/>
+            <Avatar/>
+            {currentUser.name}
+          </User>
+        ) : (
+          <Link to='/signin' style={{textDecoration: 'none'}}>
+            <Button>
+              <AccountCircleOutlined fontSize='small'/>
+              SIGN IN
+            </Button>
+          </Link>
+        )}
       </Wrapper>
     </Container>
   );
