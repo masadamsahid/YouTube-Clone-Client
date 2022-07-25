@@ -8,6 +8,7 @@ import {useLocation, useParams} from "react-router-dom";
 import axios from "axios";
 import {dislikeVideo, fetchFailure, fetchStart, fetchSuccess, likeVideo} from "../redux/videoSlice";
 import {format} from "timeago.js";
+import {subscription} from "../redux/userSlice";
 
 const Container = styled.div`
   display: flex;
@@ -104,8 +105,8 @@ const Description = styled.p`
 `;
 
 const Subscribe = styled.button`
-  color: white;
-  background-color: red;
+  color: ${({isSubscribed}) => isSubscribed ? '#343434' : 'white'};
+  background-color: ${({isSubscribed}) => isSubscribed ? '#9b9b9b' : 'red'};
   border: none;
   border-radius: 2px;
   width: fit-content;
@@ -148,6 +149,15 @@ const WatchVideoPage = () => {
     await axios.put(`/users/dislike/${currentVideo._id}`);
     dispatch(dislikeVideo(currentUser._id));
   }
+  
+  const handleSub = async () => {
+    currentUser.subscribedUsers.includes(channel._id)
+      ? await axios.put(`/users/unsub/${channel._id}`)
+      : await axios.put(`/users/sub/${channel._id}`);
+    dispatch(subscription(channel._id));
+  }
+  
+  console.log(channel)
   
   return (
     <Container>
@@ -203,13 +213,16 @@ const WatchVideoPage = () => {
             <Image src={channel?.img || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}/>
             <ChannelDetail>
               <ChannelName>{channel?.name}</ChannelName>
-              <ChannelCounter>{channel?.subscribers?.length || '0'} subscribers</ChannelCounter>
+              <ChannelCounter>{channel?.subscribers} subscribers</ChannelCounter>
               <Description>
                 {currentVideo?.desc || '[NO DESC]'}
               </Description>
             </ChannelDetail>
           </ChannelInfo>
-          <Subscribe>
+          <Subscribe
+            onClick={handleSub}
+            isSubscribed={currentUser?.subscribedUsers?.includes(channel._id)}
+          >
             {currentUser?.subscribedUsers?.includes(channel._id) ? 'SUBSCRIBED' : 'SUBSCRIBE'}
           </Subscribe>
         </Channel>
