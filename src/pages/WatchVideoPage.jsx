@@ -116,6 +116,12 @@ const Subscribe = styled.button`
   cursor: pointer;
 `;
 
+const VideoFrame = styled.video`
+  max-height: 720px;
+  width: 100%;
+  object-fit: cover;
+`;
+
 const WatchVideoPage = () => {
   const dispatch = useDispatch();
   const {currentUser} = useSelector(store => store.user);
@@ -157,21 +163,11 @@ const WatchVideoPage = () => {
     dispatch(subscription(channel._id));
   }
   
-  console.log(channel)
-  
   return (
     <Container>
       <Content>
         <VideoWrapper>
-          <iframe
-            width="100%"
-            height="480"
-            src="https://www.youtube.com/embed/wr_k36Zmo5g"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <VideoFrame src={currentVideo.videoUrl}/>
         </VideoWrapper>
         <Title>{currentVideo?.title}</Title>
         <Details>
@@ -227,7 +223,7 @@ const WatchVideoPage = () => {
           </Subscribe>
         </Channel>
         <Hr/>
-        <Comments/>
+        <Comments videoId={currentVideo._id}/>
       </Content>
       <Recommendation>
         {/*<Card type="small"/>
