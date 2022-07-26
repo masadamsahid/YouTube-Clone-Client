@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import axios from "axios";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {signInWithPopup} from 'firebase/auth';
 
 import {loginFailure, loginStart, loginSuccess} from "../redux/userSlice";
 import {auth, provider} from "../firebase";
+import {Navigate} from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -77,9 +78,13 @@ const SignInPage = () => {
   
   const dispatch = useDispatch();
   
+  const {currentUser} = useSelector(store => store.user);
+  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  if (currentUser) return <Navigate to='/'/>
   
   const handleLogin = async (e) => {
     e.preventDefault();
