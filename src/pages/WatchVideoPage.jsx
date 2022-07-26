@@ -133,7 +133,6 @@ const WatchVideoPage = () => {
       fetchStart();
       try {
         const videoRes = await axios.get(`/videos/find/${id}`);
-        
         const channelRes = await axios.get(`/users/find/${videoRes.data.userId}`);
         
         setChannel(channelRes.data);
@@ -164,7 +163,7 @@ const WatchVideoPage = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame src={currentVideo.videoUrl} controls/>
+          <VideoFrame src={currentVideo?.videoUrl} controls/>
         </VideoWrapper>
         <Title>{currentVideo?.title}</Title>
         <Details>
@@ -172,9 +171,9 @@ const WatchVideoPage = () => {
           <Buttons>
             <Button
               onClick={handleLike}
-              isPressed={currentVideo.likes.includes(currentUser?._id)}
+              isPressed={currentVideo?.likes?.includes(currentUser?._id)}
             >
-              {currentVideo.likes.includes(currentUser?._id) ? (
+              {currentVideo?.likes?.includes(currentUser?._id) ? (
                 <ThumbUp fontSize='small'/>
               ) : (
                 <ThumbUpOutlined fontSize='small'/>
@@ -183,9 +182,9 @@ const WatchVideoPage = () => {
             </Button>
             <Button
               onClick={handleDislike}
-              isPressed={currentVideo.dislikes.includes(currentUser?._id)}
+              isPressed={currentVideo?.dislikes?.includes(currentUser?._id)}
             >
-              {currentVideo.dislikes.includes(currentUser?._id) ? (
+              {currentVideo?.dislikes?.includes(currentUser?._id) ? (
                 <ThumbDown fontSize='small'/>
               ):(
                 <ThumbDownOutlined fontSize='small'/>
@@ -214,15 +213,15 @@ const WatchVideoPage = () => {
           </ChannelInfo>
           <Subscribe
             onClick={handleSub}
-            isSubscribed={currentUser?.subscribedUsers?.includes(channel._id)}
+            isSubscribed={currentUser?.subscribedUsers?.includes(channel?._id)}
           >
-            {currentUser?.subscribedUsers?.includes(channel._id) ? 'SUBSCRIBED' : 'SUBSCRIBE'}
+            {currentUser?.subscribedUsers?.includes(channel?._id) ? 'SUBSCRIBED' : 'SUBSCRIBE'}
           </Subscribe>
         </Channel>
         <Hr/>
-        <Comments videoId={currentVideo._id}/>
+        <Comments videoId={currentVideo?._id}/>
       </Content>
-      <SidebarRecommendations tags={currentVideo.tags}/>
+      <SidebarRecommendations tags={currentVideo?.tags}/>
     </Container>
   );
 };
