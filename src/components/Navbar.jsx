@@ -8,7 +8,7 @@ import {
   Settings,
   VideoCallOutlined
 } from "@mui/icons-material";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {darkTheme} from "../utils/Theme";
 import {Divider, Menu, MenuItem} from "@mui/material";
@@ -77,8 +77,11 @@ const Avatar = styled.img`
 const Navbar = (props) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const navigate = useNavigate();
   
   const {currentUser} = useSelector((store) => store.user);
+  
+  const [q,setQ] = useState("");
   
   const [profileMenuAnchor,setProfileMenuAnchor] = useState(null);
   const open = Boolean(profileMenuAnchor);
@@ -98,8 +101,8 @@ const Navbar = (props) => {
       <Container>
         <Wrapper>
           <Search>
-            <Input placeholder='Search'/>
-            <SearchOutlined/>
+            <Input placeholder='Search' onChange={(e)=>setQ(e.target.value)}/>
+            <SearchOutlined onClick={()=>navigate(`/search?q=${q}`)}/>
           </Search>
           {currentUser ? (
             <User>

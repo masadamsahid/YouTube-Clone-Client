@@ -8,6 +8,7 @@ import {darkTheme, lightTheme} from "./utils/Theme";
 import HomePage from "./pages/HomePage";
 import WatchVideoPage from "./pages/WatchVideoPage";
 import SignInPage from "./pages/SignInPage";
+import SearchPage from "./pages/SearchPage";
 
 const Container = styled.div`
   display: flex;
@@ -52,6 +53,7 @@ function App() {
                   <Route index element={<HomePage type="random"/>}/>
                   <Route path="trends" element={<HomePage type="trend"/>}/>
                   <Route path="subscriptions" element={<HomePage type="sub"/>}/>
+                  <Route path="search" element={<SearchPage/>}/>
                   <Route path="video">
                     <Route path=":id" element={<WatchVideoPage/>}/>
                   </Route>
