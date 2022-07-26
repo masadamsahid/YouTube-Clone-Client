@@ -14,6 +14,8 @@ import {darkTheme} from "../utils/Theme";
 import {Divider, Menu, MenuItem} from "@mui/material";
 import {logout} from "../redux/userSlice";
 import UploadVideoModal from "./UploadVideoModal";
+import axios from "axios";
+import {provider} from "../firebase";
 
 
 const Container = styled.div`
@@ -96,6 +98,16 @@ const Navbar = (props) => {
     setProfileMenuAnchor(null);
   }
   
+  const handleLogout = async ()=> {
+    try {
+      await axios.put('auth/signout').then(res => alert(res.data));
+      dispatch(logout());
+    }catch (err) {
+      console.log(err);
+    }
+    handleClose();
+  }
+  
   return (
     <>
       <Container>
@@ -134,10 +146,7 @@ const Navbar = (props) => {
                   &nbsp;
                   Settings
                 </MenuItem>
-                <MenuItem onClick={()=> {
-                  dispatch(logout());
-                  handleClose();
-                }}>
+                <MenuItem onClick={handleLogout}>
                   <Logout fontSize='small' sx={{transform: 'scaleX(-1)'}}/>
                   &nbsp;
                   Logout
