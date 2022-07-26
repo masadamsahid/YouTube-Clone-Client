@@ -9,6 +9,7 @@ import axios from "axios";
 import {dislikeVideo, fetchFailure, fetchStart, fetchSuccess, likeVideo} from "../redux/videoSlice";
 import {format} from "timeago.js";
 import {subscription} from "../redux/userSlice";
+import SidebarRecommendations from "../components/SidebarRecommendations";
 
 const Container = styled.div`
   display: flex;
@@ -60,10 +61,6 @@ const Button = styled.button`
 const Hr = styled.hr`
   margin: 15px 0;
   border: .5px solid ${({theme}) => theme.soft};
-`;
-
-const Recommendation = styled.div`
-  flex: 2;
 `;
 
 const Channel = styled.div`
@@ -225,16 +222,7 @@ const WatchVideoPage = () => {
         <Hr/>
         <Comments videoId={currentVideo._id}/>
       </Content>
-      <Recommendation>
-        {/*<Card type="small"/>
-        <Card type="small"/>
-        <Card type="small"/>
-        <Card type="small"/>
-        <Card type="small"/>
-        <Card type="small"/>
-        <Card type="small"/>
-        <Card type="small"/>*/}
-      </Recommendation>
+      <SidebarRecommendations tags={currentVideo.tags}/>
     </Container>
   );
 };
