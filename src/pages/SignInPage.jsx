@@ -97,6 +97,15 @@ const SignInPage = () => {
     }
   }
   
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`/auth/signup`, {name,email,password});
+    }catch (err) {
+      console.log(err)
+    }
+  }
+  
   const signInWithGoogle = async () => {
     dispatch(loginStart());
     signInWithPopup(auth,provider)
@@ -114,7 +123,6 @@ const SignInPage = () => {
       .catch((err) => {
         dispatch(loginFailure());
       });
-    
   }
   
   return (
@@ -134,7 +142,7 @@ const SignInPage = () => {
         <Input placeholder='username' onChange={(e) => setName(e.target.value)}/>
         <Input type='email' placeholder='email' onChange={(e) => setEmail(e.target.value)}/>
         <Input type='password' placeholder='password' onChange={(e) => setPassword(e.target.value)}/>
-        <Button>
+        <Button onClick={handleSignUp}>
           Sign up
         </Button>
       </Wrapper>
