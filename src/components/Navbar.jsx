@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {darkTheme} from "../utils/Theme";
 import {Divider, Menu, MenuItem} from "@mui/material";
 import {logout} from "../redux/userSlice";
+import UploadVideoModal from "./UploadVideoModal";
 
 
 const Container = styled.div`
@@ -82,6 +83,8 @@ const Navbar = (props) => {
   const [profileMenuAnchor,setProfileMenuAnchor] = useState(null);
   const open = Boolean(profileMenuAnchor);
   
+  const [openUploadVideo,setOpenUploadVideo] = useState(false);
+  
   const handleClick = (e) => {
     setProfileMenuAnchor(e.currentTarget);
   }
@@ -91,62 +94,65 @@ const Navbar = (props) => {
   }
   
   return (
-    <Container>
-      <Wrapper>
-        <Search>
-          <Input placeholder='Search'/>
-          <SearchOutlined/>
-        </Search>
-        {currentUser ? (
-          <User>
-            <VideoCallOutlined/>
-            <Avatar
-              src={currentUser.img ? currentUser.img : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
-              onClick={handleClick}
-            />
-            {currentUser.name}
-            <Menu
-              open={open}
-              anchorEl={profileMenuAnchor}
-              onClose={handleClose}
-              PaperProps={{
-                sx: {
-                  backgroundColor: theme.bg,
-                  color: theme.text,
-                }
-              }}
-            >
-              <MenuItem>
-                <AccountBox fontSize='small'/>
-                &nbsp;
-                Profile
-              </MenuItem>
-              <Divider color={theme.soft}/>
-              <MenuItem>
-                <Settings fontSize='small'/>
-                &nbsp;
-                Settings
-              </MenuItem>
-              <MenuItem onClick={()=> {
-                dispatch(logout());
-                handleClose();
-              }}>
-                <Logout fontSize='small' sx={{transform: 'scaleX(-1)'}}/>
-                &nbsp;
-                Logout
-              </MenuItem>
-            </Menu>
-          </User>
-        ) : (
-          <Link to='/signin' style={{textDecoration: 'none'}}>
-            <Button>
-              <AccountCircleOutlined fontSize='small'/>
-              SIGN IN
-            </Button>
-          </Link>
-        )}
-      </Wrapper>
-    </Container>
+    <>
+      <Container>
+        <Wrapper>
+          <Search>
+            <Input placeholder='Search'/>
+            <SearchOutlined/>
+          </Search>
+          {currentUser ? (
+            <User>
+              <VideoCallOutlined style={{cursor: 'pointer'}} onClick={()=>setOpenUploadVideo(true)}/>
+              <Avatar
+                src={currentUser.img ? currentUser.img : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+                onClick={handleClick}
+              />
+              {currentUser.name}
+              <Menu
+                open={open}
+                anchorEl={profileMenuAnchor}
+                onClose={handleClose}
+                PaperProps={{
+                  sx: {
+                    backgroundColor: theme.bg,
+                    color: theme.text,
+                  }
+                }}
+              >
+                <MenuItem>
+                  <AccountBox fontSize='small'/>
+                  &nbsp;
+                  Profile
+                </MenuItem>
+                <Divider color={theme.soft}/>
+                <MenuItem>
+                  <Settings fontSize='small'/>
+                  &nbsp;
+                  Settings
+                </MenuItem>
+                <MenuItem onClick={()=> {
+                  dispatch(logout());
+                  handleClose();
+                }}>
+                  <Logout fontSize='small' sx={{transform: 'scaleX(-1)'}}/>
+                  &nbsp;
+                  Logout
+                </MenuItem>
+              </Menu>
+            </User>
+          ) : (
+            <Link to='/signin' style={{textDecoration: 'none'}}>
+              <Button>
+                <AccountCircleOutlined fontSize='small'/>
+                SIGN IN
+              </Button>
+            </Link>
+          )}
+        </Wrapper>
+      </Container>
+      {openUploadVideo && <UploadVideoModal setOpen={setOpenUploadVideo}/>}
+    </>
   );
 };
 
